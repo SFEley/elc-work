@@ -10,7 +10,7 @@ When /^I go to the people listing$/ do
 end
 
 Then /^I should see in order:$/ do |list|
-  match_string = list.raw.flatten.join('.*')
+  match_string = list.raw.flatten.join('.*').gsub(/\s/, '.*')
   match = Regexp.new(match_string, Regexp::MULTILINE)
-  page.should have_content(match)
+  page.text.should =~ match
 end
